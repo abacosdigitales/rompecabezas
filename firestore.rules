@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function signed() { return request.auth != null; }
+    function isAdmin() { return signed() && exists(/databases/$(db)/documents/admins/$(request.auth.uid)); }
+    function mine() { return signed() && resource.data.uid == request.auth.uid; }
+
+    // Admins: solo se crean a mano desde la consola de Firebase
+    match /admins/{id} { allow read: if signed() && request.auth.uid == id; allow write: if false; }
+
+    // Clientes: cada uno crea y lee su propio perfil; el admin ve a todos
+    match /users/{id} {
+      allow read: if isAdmin() || (signed() && request.auth.uid == id);
+      allow create: if signed() && request.auth.uid == id
+        && request.resource.data.keys().hasOnly(['name','email','phone','created'])
+        && request.resource.data.phone is string && request.resource.data.phone.size() < 25;
+      allow update: if isAdmin();
+    }
+
+    // Proyectos e historial: el cliente solo lee los suyos; solo el admin escribe
+    match /projects/{id} { allow read: if isAdmin() || mine(); allow write: if isAdmin(); }
+    match /log/{id}      { allow read: if isAdmin() || mine(); allow write: if isAdmin(); }
+
+    // Solicitudes de presupuesto: cualquiera puede enviar, solo el admin las ve
+    match /leads/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['n','e','p','c','t'])
+        && request.resource.data.n is string && request.resource.data.n.size() < 100
+        && request.resource.data.p is string && request.resource.data.p.size() < 25;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

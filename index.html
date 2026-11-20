@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rompecabezas · Ábacos Digitales</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath fill='%233fa142' d='M14 4H46A10 10 0 0 1 56 14V46A10 10 0 0 1 46 56H41A11 11 0 0 0 19 56H14A10 10 0 0 1 4 46V14A10 10 0 0 1 14 4Z'/%3E%3Cpath fill='%23ef4b4b' d='M74 4H106A10 10 0 0 1 116 14V46A10 10 0 0 1 106 56H74A10 10 0 0 1 64 46V45A11 11 0 0 0 64 23V14A10 10 0 0 1 74 4Z'/%3E%3Cpath fill='%23f7cf2d' d='M74 64H79A11 11 0 0 0 101 64H106A10 10 0 0 1 116 74V106A10 10 0 0 1 106 116H74A10 10 0 0 1 64 106V74A10 10 0 0 1 74 64Z'/%3E%3Cpath fill='%2317b8d0' d='M14 64H46A10 10 0 0 1 56 74V79A11 11 0 0 0 56 101V106A10 10 0 0 1 46 116H14A10 10 0 0 1 4 106V74A10 10 0 0 1 14 64Z'/%3E%3Ccircle cx='60' cy='34' r='9' fill='%233fa142'/%3E%3Ccircle cx='90' cy='60' r='9' fill='%23ef4b4b'/%3E%3Ccircle cx='60' cy='90' r='9' fill='%23f7cf2d'/%3E%3Ccircle cx='30' cy='60' r='9' fill='%2317b8d0'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0c;--sf:#151518;--tx:#ececf0;--mu:#a1a1aa;--bd:#2b2b31;--ac:#2bb3c9;--gr:#3fa142;--rd:#ef4b4b;--ye:#f7cf2d;--cy:#17b8d0;--nv:#0f1226;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Sora,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% -10%,#17b8d01c,transparent 55%),linear-gradient(#0a0a0c99,#0a0a0cdd),url(fondo.jpg) center/cover no-repeat,var(--bg)}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 20px;background:color-mix(in srgb,var(--sf) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd);position:sticky;top:env(safe-area-inset-top,0px);z-index:9}
+.logo{font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px;cursor:pointer}.wm{display:flex;flex-direction:column;line-height:1}.logo small{display:block;color:var(--mu);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+nav{display:flex;gap:6px;flex-wrap:wrap}nav a,nav button{padding:7px 12px;border-radius:10px;border:0;background:none;color:var(--tx);cursor:pointer;font:inherit;font-size:14px}nav a:hover,nav button:hover{background:var(--bd)}
+.b{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:9px 16px;border-radius:11px;cursor:pointer;font:inherit;font-weight:600;transition:transform .15s}.b:hover{transform:translateY(-2px)}
+.b.p{background:var(--ac);border-color:var(--ac);color:#04181e}
+main{max-width:1040px;margin:0 auto;padding:0 18px 30px}
+.hero{position:relative;overflow:hidden;margin:20px 0;padding:68px 34px;border-radius:16px;color:#fff;border:1px solid var(--bd);background:#0a0a0c8c;backdrop-filter:blur(6px)}
+.hero h1{margin:0 0 12px;font-size:clamp(30px,6vw,48px);line-height:1.12;font-weight:700;letter-spacing:-.02em;max-width:600px}
+.hero h1 em{font-style:normal;color:var(--cy)}
+.hero p{max-width:480px;color:#cfd2ee;margin:0 0 20px}.hero .b{border:0}.hero .b.w{background:#ffffff1f;color:#fff}
+.fp{position:absolute;opacity:.9;animation:fl 7s ease-in-out infinite;filter:drop-shadow(0 8px 12px #0007)}@media (max-width:700px){.fp{display:none}}
+
+@keyframes fl{50%{transform:translateY(-14px) rotate(6deg)}}
+h2{margin:44px 0 6px;font-size:26px;font-weight:800}.sub{color:var(--mu);margin:0 0 16px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+#steps{grid-template-columns:repeat(5,minmax(0,1fr))}
+#cat{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+@media (max-width:860px){#steps{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:210px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}#steps .c{scroll-snap-align:start}}
+.c{background:color-mix(in srgb,var(--sf) 92%,transparent);border:1px solid var(--bd);border-radius:12px;padding:16px;transition:transform .2s,border-color .2s}
+.c.h:hover{transform:translateY(-2px);border-color:#46464c}
+.st i{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;font-style:normal;font-size:20px;margin-bottom:8px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.tabs .b.on{background:var(--ac);color:#04181e;border-color:var(--ac)}
+.pz{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));margin:12px 0}
+.p1{border:2px dashed var(--bd);border-radius:16px;padding:14px 6px;text-align:center;opacity:.65;transition:.2s;background:var(--sf);font-size:12px}
+.p1 b{display:block;font-size:28px}.sim .p1{cursor:pointer}.sim .p1:hover{opacity:1;transform:scale(1.05)}
+.k0{--k:var(--gr)}.k1{--k:var(--rd)}.k2{--k:var(--ye)}.k3{--k:var(--cy)}
+.p1.ok{border-style:solid;border-color:var(--k);opacity:1;background:color-mix(in srgb,var(--k) 20%,var(--sf));animation:pop .35s}
+@keyframes pop{40%{transform:scale(1.12) rotate(-3deg)}}
+.bar{height:14px;border-radius:9px;background:var(--bd);overflow:hidden}.bar div{height:100%;border-radius:9px;background:linear-gradient(90deg,var(--cy),var(--gr),var(--ye),var(--rd));transition:width .5s}
+input,select{font:inherit;padding:9px 11px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);max-width:100%}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+details{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:12px 16px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+.mu{color:var(--mu)}.ring{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.kp{font-size:28px;font-weight:800}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:600px}td,th{padding:8px 6px;border-bottom:1px solid var(--bd);text-align:left;font-size:14px}
+.tag{padding:2px 9px;border-radius:20px;font-size:12px;background:var(--bd)}.tag.ok{background:var(--gr);color:#fff}
+footer{text-align:center;color:var(--mu);font-size:13px;padding:20px}
+.adm{border-top:4px solid var(--rd)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17b8d0"/><stop offset=".4" stop-color="#3fa142"/><stop offset=".7" stop-color="#f7cf2d"/><stop offset="1" stop-color="#ef4b4b"/></linearGradient></defs></svg>
+<header><a class="logo" href="#"><svg width="36" height="36" viewBox="0 0 120 120"><path fill="#3fa142" d="M14 4H46A10 10 0 0 1 56 14V46A10 10 0 0 1 46 56H41A11 11 0 0 0 19 56H14A10 10 0 0 1 4 46V14A10 10 0 0 1 14 4Z"/><path fill="#ef4b4b" d="M74 4H106A10 10 0 0 1 116 14V46A10 10 0 0 1 106 56H74A10 10 0 0 1 64 46V45A11 11 0 0 0 64 23V14A10 10 0 0 1 74 4Z"/><path fill="#f7cf2d" d="M74 64H79A11 11 0 0 0 101 64H106A10 10 0 0 1 116 74V106A10 10 0 0 1 106 116H74A10 10 0 0 1 64 106V74A10 10 0 0 1 74 64Z"/><path fill="#17b8d0" d="M14 64H46A10 10 0 0 1 56 74V79A11 11 0 0 0 56 101V106A10 10 0 0 1 46 116H14A10 10 0 0 1 4 106V74A10 10 0 0 1 14 64Z"/><circle cx="60" cy="34" r="9" fill="#3fa142"/><circle cx="90" cy="60" r="9" fill="#ef4b4b"/><circle cx="60" cy="90" r="9" fill="#f7cf2d"/><circle cx="30" cy="60" r="9" fill="#17b8d0"/></svg><span class="wm">Rompecabezas<small>Ábacos Digitales</small></span></a>
+<nav id="nv"><button onclick="sc('como')">Cómo funciona</button><button onclick="sc('armar')">Armá tu PC</button><button onclick="sc('faq')">Preguntas</button><a class="b p" href="#cliente">Mi proyecto</a></nav></header>
+<main>
+<section id="v-pub">
+<div class="hero"><svg class="fp" viewBox="0 0 72 60" width="84" style="right:12%;top:12%"><path fill="#3fa142" d="M14 4H46A10 10 0 0 1 56 14V46A10 10 0 0 1 46 56H41A11 11 0 0 0 19 56H14A10 10 0 0 1 4 46V14A10 10 0 0 1 14 4Z"/><circle cx="60" cy="34" r="9" fill="#3fa142"/></svg><svg class="fp" viewBox="60 0 60 72" width="70" style="right:30%;top:56%;animation-delay:-2s"><path fill="#ef4b4b" d="M74 4H106A10 10 0 0 1 116 14V46A10 10 0 0 1 106 56H74A10 10 0 0 1 64 46V45A11 11 0 0 0 64 23V14A10 10 0 0 1 74 4Z"/><circle cx="90" cy="60" r="9" fill="#ef4b4b"/></svg><svg class="fp" viewBox="48 60 72 60" width="76" style="right:6%;top:62%;animation-delay:-4s"><path fill="#f7cf2d" d="M74 64H79A11 11 0 0 0 101 64H106A10 10 0 0 1 116 74V106A10 10 0 0 1 106 116H74A10 10 0 0 1 64 106V74A10 10 0 0 1 74 64Z"/><circle cx="60" cy="90" r="9" fill="#f7cf2d"/></svg><svg class="fp" viewBox="0 48 60 72" width="54" style="right:36%;top:8%;animation-delay:-1s"><path fill="#17b8d0" d="M14 64H46A10 10 0 0 1 56 74V79A11 11 0 0 0 56 101V106A10 10 0 0 1 46 116H14A10 10 0 0 1 4 106V74A10 10 0 0 1 14 64Z"/><circle cx="30" cy="60" r="9" fill="#17b8d0"/></svg>
+<h1>Tu próxima PC, <em>pieza por pieza</em></h1><p>Elegís la configuración, comprás los componentes a tu ritmo y seguís tu avance en vivo. Cuando completás el rompecabezas, Ábacos ensambla y prueba tu equipo.</p>
+<button class="b p" onclick="sc('armar')">Armá tu rompecabezas</button> <button class="b w" onclick="sc('pres')">Pedir presupuesto</button></div>
+<div id="como"><h2>Cómo funciona</h2><p class="sub">Cinco pasos, sin cuotas ni créditos: comprás piezas reales.</p></div><div class="g" id="steps"></div>
+<div id="armar"><h2>Armá tu rompecabezas</h2><p class="sub">Elegí una configuración y tocá las piezas para ver cómo avanza tu PC.</p></div>
+<div class="c sim rv"><div class="tabs" id="stabs"></div><div class="pz" id="spz"></div><div class="bar"><div id="sbar" style="width:0"></div></div><p id="sinfo" class="mu"></p></div>
+<h2>Configuraciones</h2><div class="g" id="cat"></div>
+<div id="pres"><h2>Pedí tu presupuesto</h2><p class="sub">Te respondemos con el listado de piezas de tu configuración.</p></div>
+<div class="c rv"><div class="row"><input id="ln" placeholder="Nombre"><input id="le" placeholder="Email"><input id="lp" type="tel" placeholder="Celular WhatsApp (ej. 341 1234567)"><select id="lc"></select><button class="b p" onclick="lead()">Enviar solicitud</button></div><div id="lm" class="mu"></div></div>
+<div id="faq"><h2>Preguntas frecuentes</h2></div>
+<details><summary>¿Es un plan de cuotas o un crédito?</summary><p class="mu">No. Comprás componentes concretos y quedan registrados y reservados a tu nombre.</p></details>
+<details><summary>¿Puedo cancelar o devolver una pieza?</summary><p class="mu">Las condiciones de cancelación, devolución y vigencia de reservas están en definición y se publicarán en los términos.</p></details>
+<details><summary>¿Cuándo se arma la PC?</summary><p class="mu">Cuando todas las piezas están compradas, Ábacos ensambla, configura y prueba el equipo.</p></details>
+<details><summary>¿Cómo sigo mi avance?</summary><p class="mu">Ingresando a “Mi proyecto” con tu email: ves piezas compradas, pendientes, porcentaje e historial.</p></details>
+</section>
+
+<section id="v-cli" hidden><h2 style="margin-top:24px">Mi proyecto</h2><div id="cli"></div></section>
+
+<section id="v-adm" hidden><h2 style="margin-top:24px">Panel de administración</h2><div id="adm"></div></section>
+</main>
+<footer><a href="#admin"><u>Acceso administración</u></a></footer>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,addDoc,updateDoc,deleteDoc,collection,query,where,onSnapshot,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+/* 1) Pegá acá la configuración de tu proyecto Firebase (Configuración del proyecto > Tus apps > Web) */
+const firebaseConfig={
+  apiKey:"AIzaSyDfmcmkScnsH7ajH_F-ZEOfJb7TSpAT2J8",
+  authDomain:"rompecabezas-26f59.firebaseapp.com",
+  projectId:"rompecabezas-26f59",
+  storageBucket:"rompecabezas-26f59.firebasestorage.app",
+  messagingSenderId:"332369826466",
+  appId:"1:332369826466:web:c6a6d00eceed3f4bb7fdfb"
+};
+const ready=firebaseConfig.apiKey!=="TU_API_KEY";
+/* 2) WhatsApp de Ábacos con código de país, solo dígitos (ej. 5493411234567). Vacío = sin botón en el portal del cliente */
+const WHATSAPP_ABACOS="";
+let auth,db;if(ready){const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app)}
+const CFG={"Estudiante":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 8 GB","🧩"],["SSD 256 GB","💾"],["Fuente 450 W","⚡"],["Gabinete","🖥️"]],"Oficina Pro":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 16 GB","🧩"],["SSD 512 GB","💾"],["Fuente 500 W","⚡"],["Gabinete","🖥️"]],"Mini Compacta":[["Procesador","🧠"],["Placa madre mini-ITX","🔌"],["Memoria RAM 16 GB","🧩"],["SSD 512 GB","💾"],["Fuente compacta","⚡"],["Gabinete compacto","🖥️"]],"Gamer Entry":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 16 GB","🧩"],["SSD 1 TB","💾"],["Placa de video","🎮"],["Fuente 650 W","⚡"],["Gabinete","🖥️"]],"Gamer Pro":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 32 GB","🧩"],["SSD 1 TB","💾"],["Placa de video","🎮"],["Cooler para procesador","❄️"],["Fuente 750 W","⚡"],["Gabinete","🖥️"]],"Gamer Ultra":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 32 GB","🧩"],["SSD 2 TB","💾"],["Placa de video","🎮"],["Refrigeración líquida","❄️"],["Fuente 850 W","⚡"],["Gabinete","🖥️"]],"Streamer":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 32 GB","🧩"],["SSD 1 TB","💾"],["Disco de grabación 2 TB","🗄️"],["Placa de video","🎮"],["Cooler para procesador","❄️"],["Fuente 750 W","⚡"],["Gabinete","🖥️"]],"Creator":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 32 GB","🧩"],["SSD 2 TB","💾"],["Placa de video","🎮"],["Cooler para procesador","❄️"],["Fuente 750 W","⚡"],["Gabinete","🖥️"]],"Workstation":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 64 GB","🧩"],["SSD 2 TB","💾"],["Disco de datos 4 TB","🗄️"],["Placa de video","🎮"],["Refrigeración líquida","❄️"],["Fuente 1000 W","⚡"],["Gabinete","🖥️"]]};
+const DESC={"Estudiante":"Estudio, navegación y videollamadas","Oficina Pro":"Trabajo diario y multitarea","Mini Compacta":"Pequeña y silenciosa para casa u oficina","Gamer Entry":"Jugar en Full HD con buen rendimiento","Gamer Pro":"Juegos exigentes en calidad alta","Gamer Ultra":"Máximo rendimiento, hasta 4K","Streamer":"Jugar y transmitir al mismo tiempo","Creator":"Edición de video, foto y diseño","Workstation":"Render, 3D y trabajo profesional pesado"};
+const STEPS=[["🧭","Elegís tu configuración","Del catálogo o a medida."],["📋","Armamos el listado","Un listado claro de piezas."],["🛒","Comprás de a una","A tu ritmo."],["🔒","Queda reservada","Registrada a tu nombre."],["🛠️","Ensamblamos y probamos","Con todo completo."]];
+const COL=["gr","rd","ye","cy"],ERR={"auth/invalid-credential":"Email o contraseña incorrectos.","auth/email-already-in-use":"Ese email ya tiene un acceso.","auth/weak-password":"La contraseña debe tener al menos 6 caracteres.","auth/invalid-email":"El email no es válido.","nombre":"Ingresá tu nombre.","celular":"Ingresá un celular válido, con código de área."};
+const NR='<div class="c" style="border-top:4px solid var(--ye)">Falta conectar Firebase: completá <b>firebaseConfig</b> en este archivo (ver LEEME.md).</div>';
+let user=null,isAdmin=false,profile=null,projects=[],logs=[],users=[],leads=[],sel=null,mode="in",unsubs=[],sim={cfg:"Gamer Entry",on:{}};
+const $=i=>document.getElementById(i);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const today=()=>new Date().toISOString().slice(0,10);
+const okPhone=p=>{const d=String(p).replace(/\D/g,"");return d.length>=8&&d.length<=15};
+const wa=(p,t)=>{let d=String(p||"").replace(/\D/g,"");if(!String(p).trim().startsWith("+")){d=d.replace(/^0+/,"");if(!d.startsWith("54"))d="549"+d}return"https://wa.me/"+d+(t?"?text="+encodeURIComponent(t):"")};
+const uname=id=>(users.find(u=>u.id==id)||{}).name||"?";
+function stat(p){let d=0;p.parts.forEach(x=>{if(x.st)d++});return{t:p.parts.length,d,pct:Math.round(d/p.parts.length*100)}}
+function tile(x,i,on,cl){return`<div class="p1 k${i%4}${on?" ok":""}"${cl||""}><b>${x.ic}</b>${x.n}<br>${on?"✔":"…"}</div>`}
+function ringSvg(p){return`<svg viewBox="0 0 100 100" width="120" height="120"><circle cx="50" cy="50" r="42" fill="none" stroke="var(--bd)" stroke-width="10"/><circle cx="50" cy="50" r="42" fill="none" stroke="url(#gg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="${264-264*p/100}" transform="rotate(-90 50 50)" style="transition:stroke-dashoffset .8s"/><text x="50" y="56" text-anchor="middle" font-size="20" font-weight="800" fill="currentColor">${p}%</text></svg>`}
+/* landing */
+function rPub(){$("steps").innerHTML=STEPS.map((s,i)=>`<div class="c h st rv"><i style="background:color-mix(in srgb,var(--${COL[i%4]}) 25%,var(--sf))">${s[0]}</i><b>${i+1}. ${s[1]}</b><br><span class="mu">${s[2]}</span></div>`).join("");
+$("cat").innerHTML=Object.keys(CFG).map((k,j)=>{return`<div class="c h rv" style="border-top:4px solid var(--${COL[j%4]})"><b>${k}</b><br><span>${CFG[k].map(p=>p[1]).join(" ")}</span><p class="mu">${DESC[k]} · ${CFG[k].length} piezas</p><button class="b" onclick="pick('${k}')">Ver y armar</button></div>`}).join("");
+$("lc").innerHTML=Object.keys(CFG).concat("Personalizada").map(k=>`<option>${k}</option>`).join("");rSim()}
+function rSim(){const c=CFG[sim.cfg];let n=0;c.forEach((p,i)=>{if(sim.on[i])n++});
+$("stabs").innerHTML=Object.keys(CFG).map(k=>`<button class="b${k==sim.cfg?" on":""}" onclick="pick('${k}')">${k}</button>`).join("");
+$("spz").innerHTML=c.map((p,i)=>tile({ic:p[1],n:p[0]},i,sim.on[i],` onclick="tg(${i})"`)).join("");
+const pc=Math.round(n/c.length*100);$("sbar").style.width=pc+"%";
+$("sinfo").innerHTML=n==c.length?`🎉 <b>¡Rompecabezas completo!</b> Ábacos ensambla y prueba tu PC.`:`<b>${pc}%</b> · ${n} de ${c.length} piezas`}
+window.sc=i=>{const e=$(i);if(e)e.scrollIntoView({behavior:"smooth",block:"start"})};
+window.pick=k=>{sim={cfg:k,on:{}};rSim();sc("armar")};
+window.tg=i=>{sim.on[i]=!sim.on[i];rSim()};
+window.lead=async()=>{const n=$("ln").value.trim(),e=$("le").value.trim(),p=$("lp").value.trim();if(!n||!e||!okPhone(p)){$("lm").textContent="Completá nombre, email y un celular válido (con código de área).";return}
+if(!ready){$("lm").textContent="Conectá Firebase para recibir solicitudes.";return}
+try{await addDoc(collection(db,"leads"),{n,e,p,c:$("lc").value,t:today()});$("lm").textContent="¡Gracias, "+n+"! Recibimos tu solicitud y te escribimos por WhatsApp.";$("ln").value=$("le").value=$("lp").value=""}catch(x){$("lm").textContent="No se pudo enviar. Probá de nuevo."}};
+/* acceso */
+const authBox=()=>`<div class="c" style="max-width:420px"><div class="tabs"><button class="b${mode=="in"?" on":""}" onclick="setMode('in')">Ingresar</button><button class="b${mode=="up"?" on":""}" onclick="setMode('up')">Crear mi acceso</button></div>${mode=="up"?'<input id="an" placeholder="Nombre y apellido" style="width:100%;margin:4px 0"><input id="at" type="tel" placeholder="Celular WhatsApp (ej. 341 1234567)" style="width:100%;margin:4px 0">':""}<input id="ae" type="email" placeholder="Email" style="width:100%;margin:4px 0"><input id="ap" type="password" placeholder="Contraseña (mín. 6)" style="width:100%;margin:4px 0"><button class="b p" onclick="doAuth()">${mode=="up"?"Crear acceso":"Ingresar"}</button><div id="aerr" style="color:var(--rd);margin-top:6px"></div></div>`;
+window.setMode=m=>{mode=m;view()};
+window.out=()=>signOut(auth);
+window.doAuth=async()=>{const e=$("ae").value.trim(),p=$("ap").value;try{if(mode=="up"){const n=$("an").value.trim(),t=$("at").value.trim();if(!n)throw{code:"nombre"};if(!okPhone(t))throw{code:"celular"};const c=await createUserWithEmailAndPassword(auth,e,p);profile={name:n,email:e,phone:t};await setDoc(doc(db,"users",c.user.uid),{name:n,email:e,phone:t,created:serverTimestamp()})}else await signInWithEmailAndPassword(auth,e,p)}catch(x){$("aerr").textContent=ERR[x.code]||"No se pudo completar. Revisá los datos."}};
+if(ready)onAuthStateChanged(auth,async u=>{unsubs.forEach(f=>f());unsubs=[];user=u;isAdmin=false;profile=null;projects=[];logs=[];users=[];leads=[];
+if(u){try{isAdmin=(await getDoc(doc(db,"admins",u.uid))).exists();const p=await getDoc(doc(db,"users",u.uid));profile=p.exists()?p.data():profile;
+const L=(q,fn)=>unsubs.push(onSnapshot(q,s=>{fn(s.docs.map(d=>({id:d.id,...d.data()})));view()}));
+if(isAdmin){L(collection(db,"projects"),a=>projects=a);L(collection(db,"log"),a=>logs=a);L(collection(db,"users"),a=>users=a);L(collection(db,"leads"),a=>leads=a)}
+else{L(query(collection(db,"projects"),where("uid","==",u.uid)),a=>projects=a);L(query(collection(db,"log"),where("uid","==",u.uid)),a=>logs=a)}}catch(e){console.error(e)}}
+view()});
+/* portal del cliente */
+function card(p){const s=stat(p),lg=logs.filter(l=>l.pid==p.id).sort((a,b)=>b.ms-a.ms);
+return`<div class="c" style="margin-bottom:14px"><div class="ring">${ringSvg(s.pct)}<div><h3 style="margin:0">${esc(p.cfg)}</h3><span class="mu">${s.d} de ${s.t} piezas</span><br><b>${s.pct==100?"🎉 ¡Completo! Ábacos va a ensamblar tu PC.":"Faltan "+(s.t-s.d)+" piezas"}</b></div></div><div class="pz">${p.parts.map((x,i)=>tile(x,i,x.st)).join("")}</div><b>Historial</b><br>${lg.length?lg.map(l=>`<small class="mu">${l.t} · ${esc(l.x)}</small><br>`).join(""):'<small class="mu">Sin compras todavía.</small>'}</div>`}
+function rCli(){const A=$("cli");if(!ready){A.innerHTML=NR;return}if(!user){A.innerHTML=authBox();return}
+A.innerHTML=`<div class="row"><b>Hola, ${esc(profile?.name||user.email)}</b><button class="b" onclick="out()">Salir</button>${WHATSAPP_ABACOS?`<a class="b" style="display:inline-block" target="_blank" rel="noopener" href="${wa("+"+WHATSAPP_ABACOS,"Hola, soy "+(profile?.name||"cliente")+" y tengo una consulta sobre mi proyecto Rompecabezas.")}">Escribir a Ábacos por WhatsApp</a>`:""}</div>`+(projects.length?projects.map(card).join(""):'<p class="mu">Todavía no tenés un proyecto. Ábacos lo crea con la configuración que elijas.</p>')}
+/* administración */
+const cur=()=>projects.find(p=>p.id==sel)||projects[0];
+async function setParts(p,parts,x){await updateDoc(doc(db,"projects",p.id),{parts});if(x)await addDoc(collection(db,"log"),{pid:p.id,uid:p.uid,x,t:today(),ms:Date.now()})}
+window.addP=()=>{const u=$("pc").value,f=$("pf").value;if(!u)return;addDoc(collection(db,"projects"),{uid:u,cfg:f,parts:CFG[f].map(([n,ic])=>({n,ic,st:0,d:"",r:""})),created:serverTimestamp()}).then(r=>{sel=r.id})};
+window.pickP=v=>{sel=v;view()};
+window.buy=i=>{const p=cur(),r=$("r"+i).value.trim();if(!r){$("r"+i).focus();return}setParts(p,p.parts.map((x,j)=>j==i?{...x,st:1,d:today(),r}:x),`${p.parts[i].n} registrada (${r})`)};
+window.undo=i=>{const p=cur();setParts(p,p.parts.map((x,j)=>j==i?{...x,st:0,d:"",r:""}:x),`${p.parts[i].n} revertida`)};
+window.price=(i,v)=>{const p=cur();setParts(p,p.parts.map((x,j)=>j==i?{...x,pr:Math.max(0,+v||0)}:x))};
+window.done=id=>deleteDoc(doc(db,"leads",id));
+function wab(p,s){const u=users.find(x=>x.id==p.uid)||{};if(!u.phone)return'<p class="mu">Este cliente no cargó celular.</p>';return`<div class="row"><a class="b p" style="display:inline-block" target="_blank" rel="noopener" href="${wa(u.phone,`Hola ${u.name}, te escribimos de Rompecabezas (Ábacos Digitales). Tu rompecabezas va ${s.pct}% (${s.d} de ${s.t} piezas).`)}">Avisar avance por WhatsApp</a><span class="mu">${esc(u.phone)}</span></div>`}
+function rAdm(){const A=$("adm");if(!ready){A.innerHTML=NR;return}if(!user){A.innerHTML=authBox();return}
+if(!isAdmin){A.innerHTML='<div class="c adm">Esta cuenta no tiene permisos de administrador.</div><p><button class="b" onclick="out()">Salir</button></p>';return}
+let nd=0,pt=0,full=0;projects.forEach(p=>{const s=stat(p);nd+=s.d;pt+=s.t;if(s.pct==100)full++});
+const p=cur(),ul=users.slice().sort((a,b)=>(a.name||"").localeCompare(b.name||""));
+let h='<div class="g">'+[["Clientes",users.length],["Proyectos",projects.length],["Piezas compradas",nd],["Piezas pendientes",pt-nd],["Completos",full],["Solicitudes",leads.length]].map((k,i)=>`<div class="c" style="border-top:4px solid var(--${COL[i%4]})"><div class="kp">${k[1]}</div><span class="mu">${k[0]}</span></div>`).join("")+"</div>";
+h+=`<h3>Nuevo proyecto</h3><div class="c"><div class="row"><select id="pc">${ul.map(u=>`<option value="${u.id}">${esc(u.name||u.email)}</option>`).join("")}</select><select id="pf">${Object.keys(CFG).map(k=>`<option>${k}</option>`).join("")}</select><button class="b p" onclick="addP()">Crear proyecto</button></div><small class="mu">Los clientes aparecen acá cuando crean su acceso.</small></div>`;
+h+=`<h3>Proyecto activo</h3><div class="row"><select onchange="pickP(this.value)">${projects.map(q=>`<option value="${q.id}"${p&&q.id==p.id?" selected":""}>${esc(uname(q.uid))} · ${esc(q.cfg)}</option>`).join("")}</select></div>`;
+if(p){const s=stat(p);h+=`<div class="c"><div class="ring">${ringSvg(s.pct)}<div><b>${esc(uname(p.uid))}</b> · ${esc(p.cfg)}<br>${s.d} de ${s.t} piezas</div></div>${wab(p,s)}<div class="tw"><table><tr><th>Pieza</th><th>Estado</th><th>Comprobante</th><th></th></tr>${p.parts.map((x,i)=>`<tr><td>${x.ic} ${x.n}</td><td><span class="tag${x.st?" ok":""}">${x.st?"Comprada · reservada":"Pendiente"}</span></td><td>${x.st?esc(x.r)+" · "+x.d:`<input id="r${i}" placeholder="N.º" style="width:110px">`}</td><td>${x.st?`<button class="b" onclick="undo(${i})">Revertir</button>`:`<button class="b p" onclick="buy(${i})">Registrar compra</button>`}</td></tr>`).join("")}</table></div></div>`}
+h+="<h3>Solicitudes de presupuesto</h3><div class='c'>"+(leads.length?leads.map(l=>`<div class="row"><span>${esc(l.n)} · ${esc(l.e)} · ${esc(l.p||"")} · ${esc(l.c)} · ${l.t}</span>${l.p?`<a class="b" style="display:inline-block" target="_blank" rel="noopener" href="${wa(l.p,"Hola "+l.n+", te escribimos de Rompecabezas (Ábacos Digitales) por tu solicitud de presupuesto.")}">WhatsApp</a>`:""}<button class="b" onclick="done('${l.id}')">Atendida</button></div>`).join(""):'<span class="mu">Sin solicitudes.</span>')+"</div>";
+h+="<h3>Actividad reciente</h3><div class='c'>"+logs.slice().sort((a,b)=>b.ms-a.ms).slice(0,10).map(l=>`<small class="mu">${l.t} · ${esc(uname(l.uid))} · ${esc(l.x)}</small><br>`).join("")+"</div>";
+h+='<p><button class="b" onclick="out()">Cerrar sesión</button></p>';A.innerHTML=h}
+/* ruteo */
+function view(){const h=location.hash.slice(1),v=h=="cliente"?"cli":h=="admin"?"adm":"pub";["pub","cli","adm"].forEach(k=>$("v-"+k).hidden=k!=v);$("nv").style.display=v=="adm"?"none":"flex";if(v=="cli")rCli();if(v=="adm")rAdm()}
+addEventListener("hashchange",()=>{view();scrollTo(0,0)});
+rPub();view();
+if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll(".rv").forEach(e=>io.observe(e))}else document.querySelectorAll(".rv").forEach(e=>e.classList.add("in"));
+</script></body></html>
