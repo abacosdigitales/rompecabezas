@@ -99,7 +99,7 @@ const cp=()=>projects.find(p=>p.id==selP);
 const cfgOpts=()=>Object.keys(CFG).map(k=>`<option>${k}</option>`).join("");
 const lg=(p,x)=>addDoc(collection(db,"log"),{pid:p.id,uid:p.uid,x,t:today(),ms:Date.now()});
 /* acceso */
-window.login=async()=>{try{await signInWithEmailAndPassword(auth,$("ae").value.trim(),$("ap").value)}catch(e){$("aerr").textContent="Email o contraseña incorrectos, o este dominio no está autorizado en Firebase."}};
+window.login=async()=>{try{await signInWithEmailAndPassword(auth,$("ae").value.trim(),$("ap").value)}catch(e){const M={"auth/invalid-credential":"Email o contraseña incorrectos.","auth/wrong-password":"Email o contraseña incorrectos.","auth/user-not-found":"Ese email no existe en Authentication.","auth/unauthorized-domain":"Este dominio no está autorizado en Firebase (Authentication > Configuración > Dominios autorizados).","auth/operation-not-allowed":"El acceso por correo y contraseña no está activado en Firebase.","auth/too-many-requests":"Demasiados intentos. Esperá unos minutos."};$("aerr").textContent=M[e.code]||"No se pudo ingresar ("+(e.code||"error")+")."}};
 window.out=()=>signOut(auth);
 if(ready)onAuthStateChanged(auth,async u=>{unsubs.forEach(f=>f());unsubs=[];user=u;isAdmin=false;
 if(u){try{isAdmin=(await getDoc(doc(db,"admins",u.uid))).exists();
