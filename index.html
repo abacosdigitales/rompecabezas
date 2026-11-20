@@ -77,11 +77,10 @@ footer{text-align:center;color:var(--mu);font-size:13px;padding:20px}
 
 <section id="v-adm" hidden><h2 style="margin-top:24px">Panel de administración</h2><div id="adm"></div></section>
 </main>
-<footer><a href="#admin"><u>Acceso administración</u></a></footer>
+<footer><a href="admin.html"><u>Acceso administración</u></a></footer>
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,addDoc,updateDoc,deleteDoc,collection,query,where,onSnapshot,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+/*LOADER*/let fb={};try{const B="https://www.gstatic.com/firebasejs/10.12.2/";const m=await Promise.all([import(B+"firebase-app.js"),import(B+"firebase-auth.js"),import(B+"firebase-firestore.js")]);m.forEach(x=>Object.assign(fb,x))}catch(e){console.error("Firebase no cargó:",e)}
+const {initializeApp,getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,getFirestore,doc,getDoc,setDoc,addDoc,updateDoc,deleteDoc,collection,query,where,onSnapshot,serverTimestamp}=fb;/*END*/
 /* 1) Pegá acá la configuración de tu proyecto Firebase (Configuración del proyecto > Tus apps > Web) */
 const firebaseConfig={
   apiKey:"AIzaSyDfmcmkScnsH7ajH_F-ZEOfJb7TSpAT2J8",
@@ -91,7 +90,8 @@ const firebaseConfig={
   messagingSenderId:"332369826466",
   appId:"1:332369826466:web:c6a6d00eceed3f4bb7fdfb"
 };
-const ready=firebaseConfig.apiKey!=="TU_API_KEY";
+const fbOk=!!fb.initializeApp;
+const ready=fbOk&&firebaseConfig.apiKey!=="TU_API_KEY";
 /* 2) WhatsApp de Ábacos con código de país, solo dígitos (ej. 5493411234567). Vacío = sin botón en el portal del cliente */
 const WHATSAPP_ABACOS="";
 let auth,db;if(ready){const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app)}
@@ -99,7 +99,7 @@ const CFG={"Estudiante":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria 
 const DESC={"Estudiante":"Estudio, navegación y videollamadas","Oficina Pro":"Trabajo diario y multitarea","Mini Compacta":"Pequeña y silenciosa para casa u oficina","Gamer Entry":"Jugar en Full HD con buen rendimiento","Gamer Pro":"Juegos exigentes en calidad alta","Gamer Ultra":"Máximo rendimiento, hasta 4K","Streamer":"Jugar y transmitir al mismo tiempo","Creator":"Edición de video, foto y diseño","Workstation":"Render, 3D y trabajo profesional pesado"};
 const STEPS=[["🧭","Elegís tu configuración","Del catálogo o a medida."],["📋","Armamos el listado","Un listado claro de piezas."],["🛒","Comprás de a una","A tu ritmo."],["🔒","Queda reservada","Registrada a tu nombre."],["🛠️","Ensamblamos y probamos","Con todo completo."]];
 const COL=["gr","rd","ye","cy"],ERR={"auth/invalid-credential":"Email o contraseña incorrectos.","auth/email-already-in-use":"Ese email ya tiene un acceso.","auth/weak-password":"La contraseña debe tener al menos 6 caracteres.","auth/invalid-email":"El email no es válido.","nombre":"Ingresá tu nombre.","celular":"Ingresá un celular válido, con código de área."};
-const NR='<div class="c" style="border-top:4px solid var(--ye)">Falta conectar Firebase: completá <b>firebaseConfig</b> en este archivo (ver LEEME.md).</div>';
+const NR=fbOk?'<div class="c" style="border-top:4px solid var(--ye)">Falta conectar Firebase: completá <b>firebaseConfig</b> en este archivo (ver LEEME.md).</div>':'<div class="c" style="border-top:4px solid var(--rd)">No se pudo cargar Firebase. Revisá tu conexión, desactivá bloqueadores de anuncios o de contenido para este sitio y recargá con Ctrl+Shift+R.</div>';
 let user=null,isAdmin=false,profile=null,projects=[],logs=[],users=[],leads=[],sel=null,mode="in",unsubs=[],sim={cfg:"Gamer Entry",on:{}};
 const $=i=>document.getElementById(i);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));

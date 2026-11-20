@@ -1,11 +1,169 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rompecabezas · Administración</title>
 <meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0;url=index.html#admin">
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0a0a0c;color:#ececf0;font:15px system-ui,sans-serif}a{color:#2bb3c9}</style>
-</head><body>
-<p>Abriendo el panel de administración… Si no se abre solo, <a href="index.html#admin">tocá acá</a>.</p>
-<script>location.replace("index.html#admin")</script>
-</body></html>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath fill='%233fa142' d='M14 4H46A10 10 0 0 1 56 14V46A10 10 0 0 1 46 56H41A11 11 0 0 0 19 56H14A10 10 0 0 1 4 46V14A10 10 0 0 1 14 4Z'/%3E%3Cpath fill='%23ef4b4b' d='M74 4H106A10 10 0 0 1 116 14V46A10 10 0 0 1 106 56H74A10 10 0 0 1 64 46V45A11 11 0 0 0 64 23V14A10 10 0 0 1 74 4Z'/%3E%3Cpath fill='%23f7cf2d' d='M74 64H79A11 11 0 0 0 101 64H106A10 10 0 0 1 116 74V106A10 10 0 0 1 106 116H74A10 10 0 0 1 64 106V74A10 10 0 0 1 74 64Z'/%3E%3Cpath fill='%2317b8d0' d='M14 64H46A10 10 0 0 1 56 74V79A11 11 0 0 0 56 101V106A10 10 0 0 1 46 116H14A10 10 0 0 1 4 106V74A10 10 0 0 1 14 64Z'/%3E%3Ccircle cx='60' cy='34' r='9' fill='%233fa142'/%3E%3Ccircle cx='90' cy='60' r='9' fill='%23ef4b4b'/%3E%3Ccircle cx='60' cy='90' r='9' fill='%23f7cf2d'/%3E%3Ccircle cx='30' cy='60' r='9' fill='%2317b8d0'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0c;--sf:#151518;--tx:#ececf0;--mu:#a1a1aa;--bd:#2b2b31;--ac:#2bb3c9;--gr:#3fa142;--rd:#ef4b4b;--ye:#f7cf2d;--cy:#17b8d0;--nv:#0f1226;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Sora,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% -10%,#17b8d01c,transparent 55%),linear-gradient(#0a0a0c99,#0a0a0cdd),url(fondo.jpg) center/cover no-repeat,var(--bg)}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 20px;background:color-mix(in srgb,var(--sf) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd);position:sticky;top:env(safe-area-inset-top,0px);z-index:9}
+.logo{font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px;cursor:pointer}.wm{display:flex;flex-direction:column;line-height:1}.logo small{display:block;color:var(--mu);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+nav{display:flex;gap:6px;flex-wrap:wrap}nav a,nav button{padding:7px 12px;border-radius:10px;border:0;background:none;color:var(--tx);cursor:pointer;font:inherit;font-size:14px}nav a:hover,nav button:hover{background:var(--bd)}
+.b{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:9px 16px;border-radius:11px;cursor:pointer;font:inherit;font-weight:600;transition:transform .15s}.b:hover{transform:translateY(-2px)}
+.b.p{background:var(--ac);border-color:var(--ac);color:#04181e}
+main{max-width:1040px;margin:0 auto;padding:0 18px 30px}
+.hero{position:relative;overflow:hidden;margin:20px 0;padding:68px 34px;border-radius:16px;color:#fff;border:1px solid var(--bd);background:#0a0a0c8c;backdrop-filter:blur(6px)}
+.hero h1{margin:0 0 12px;font-size:clamp(30px,6vw,48px);line-height:1.12;font-weight:700;letter-spacing:-.02em;max-width:600px}
+.hero h1 em{font-style:normal;color:var(--cy)}
+.hero p{max-width:480px;color:#cfd2ee;margin:0 0 20px}.hero .b{border:0}.hero .b.w{background:#ffffff1f;color:#fff}
+.fp{position:absolute;opacity:.9;animation:fl 7s ease-in-out infinite;filter:drop-shadow(0 8px 12px #0007)}@media (max-width:700px){.fp{display:none}}
+
+@keyframes fl{50%{transform:translateY(-14px) rotate(6deg)}}
+h2{margin:44px 0 6px;font-size:26px;font-weight:800}.sub{color:var(--mu);margin:0 0 16px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+#steps{grid-template-columns:repeat(5,minmax(0,1fr))}
+#cat{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+@media (max-width:860px){#steps{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:210px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}#steps .c{scroll-snap-align:start}}
+.c{background:color-mix(in srgb,var(--sf) 92%,transparent);border:1px solid var(--bd);border-radius:12px;padding:16px;transition:transform .2s,border-color .2s}
+.c.h:hover{transform:translateY(-2px);border-color:#46464c}
+.st i{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;font-style:normal;font-size:20px;margin-bottom:8px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.tabs .b.on{background:var(--ac);color:#04181e;border-color:var(--ac)}
+.pz{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));margin:12px 0}
+.p1{border:2px dashed var(--bd);border-radius:16px;padding:14px 6px;text-align:center;opacity:.65;transition:.2s;background:var(--sf);font-size:12px}
+.p1 b{display:block;font-size:28px}.sim .p1{cursor:pointer}.sim .p1:hover{opacity:1;transform:scale(1.05)}
+.k0{--k:var(--gr)}.k1{--k:var(--rd)}.k2{--k:var(--ye)}.k3{--k:var(--cy)}
+.p1.ok{border-style:solid;border-color:var(--k);opacity:1;background:color-mix(in srgb,var(--k) 20%,var(--sf));animation:pop .35s}
+@keyframes pop{40%{transform:scale(1.12) rotate(-3deg)}}
+.bar{height:14px;border-radius:9px;background:var(--bd);overflow:hidden}.bar div{height:100%;border-radius:9px;background:linear-gradient(90deg,var(--cy),var(--gr),var(--ye),var(--rd));transition:width .5s}
+input,select{font:inherit;padding:9px 11px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);max-width:100%}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+details{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:12px 16px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+.mu{color:var(--mu)}.ring{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.kp{font-size:28px;font-weight:800}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:600px}td,th{padding:8px 6px;border-bottom:1px solid var(--bd);text-align:left;font-size:14px}
+.tag{padding:2px 9px;border-radius:20px;font-size:12px;background:var(--bd)}.tag.ok{background:var(--gr);color:#fff}
+footer{text-align:center;color:var(--mu);font-size:13px;padding:20px}
+.adm{border-top:4px solid var(--rd)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.shell{display:grid;grid-template-columns:210px 1fr;gap:18px;max-width:1180px;margin:18px auto;padding:0 18px}
+.side{position:sticky;top:76px;align-self:start;display:flex;flex-direction:column;gap:6px}
+.side .b{text-align:left}.side .b.on{background:var(--ac);border-color:var(--ac);color:#04181e}
+.wrap{max-width:1000px;margin:20px auto;padding:0 18px}.main h3{margin:22px 0 8px}
+@media (max-width:800px){.shell{grid-template-columns:1fr}.side{position:static;flex-direction:row;overflow-x:auto}.side .b{flex:none;white-space:nowrap}}
+</style></head><body>
+<header><a class="logo" href="index.html"><svg width="36" height="36" viewBox="0 0 120 120"><path fill="#3fa142" d="M14 4H46A10 10 0 0 1 56 14V46A10 10 0 0 1 46 56H41A11 11 0 0 0 19 56H14A10 10 0 0 1 4 46V14A10 10 0 0 1 14 4Z"/><path fill="#ef4b4b" d="M74 4H106A10 10 0 0 1 116 14V46A10 10 0 0 1 106 56H74A10 10 0 0 1 64 46V45A11 11 0 0 0 64 23V14A10 10 0 0 1 74 4Z"/><path fill="#f7cf2d" d="M74 64H79A11 11 0 0 0 101 64H106A10 10 0 0 1 116 74V106A10 10 0 0 1 106 116H74A10 10 0 0 1 64 106V74A10 10 0 0 1 74 64Z"/><path fill="#17b8d0" d="M14 64H46A10 10 0 0 1 56 74V79A11 11 0 0 0 56 101V106A10 10 0 0 1 46 116H14A10 10 0 0 1 4 106V74A10 10 0 0 1 14 64Z"/><circle cx="60" cy="34" r="9" fill="#3fa142"/><circle cx="90" cy="60" r="9" fill="#ef4b4b"/><circle cx="60" cy="90" r="9" fill="#f7cf2d"/><circle cx="30" cy="60" r="9" fill="#17b8d0"/></svg><span class="wm">Rompecabezas<small>Panel de administración</small></span></a><nav><a href="index.html">Ver sitio</a></nav></header>
+<div id="app"></div>
+<script type="module">
+/*LOADER*/let fb={};try{const B="https://www.gstatic.com/firebasejs/10.12.2/";const m=await Promise.all([import(B+"firebase-app.js"),import(B+"firebase-auth.js"),import(B+"firebase-firestore.js")]);m.forEach(x=>Object.assign(fb,x))}catch(e){console.error("Firebase no cargó:",e)}
+const {initializeApp,getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,getFirestore,doc,getDoc,setDoc,addDoc,updateDoc,deleteDoc,collection,query,where,onSnapshot,serverTimestamp}=fb;/*END*/
+/* 1) Pegá acá la configuración de tu proyecto Firebase (Configuración del proyecto > Tus apps > Web) */
+const firebaseConfig={
+  apiKey:"AIzaSyDfmcmkScnsH7ajH_F-ZEOfJb7TSpAT2J8",
+  authDomain:"rompecabezas-26f59.firebaseapp.com",
+  projectId:"rompecabezas-26f59",
+  storageBucket:"rompecabezas-26f59.firebasestorage.app",
+  messagingSenderId:"332369826466",
+  appId:"1:332369826466:web:c6a6d00eceed3f4bb7fdfb"
+};
+const fbOk=!!fb.initializeApp;
+const ready=fbOk&&firebaseConfig.apiKey!=="TU_API_KEY";
+/* 2) WhatsApp de Ábacos con código de país, solo dígitos (ej. 5493411234567). Vacío = sin botón en el portal del cliente */
+const WHATSAPP_ABACOS="";
+let auth,db;if(ready){const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app)}
+
+const CFG={"Estudiante":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 8 GB","🧩"],["SSD 256 GB","💾"],["Fuente 450 W","⚡"],["Gabinete","🖥️"]],"Oficina Pro":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 16 GB","🧩"],["SSD 512 GB","💾"],["Fuente 500 W","⚡"],["Gabinete","🖥️"]],"Mini Compacta":[["Procesador","🧠"],["Placa madre mini-ITX","🔌"],["Memoria RAM 16 GB","🧩"],["SSD 512 GB","💾"],["Fuente compacta","⚡"],["Gabinete compacto","🖥️"]],"Gamer Entry":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 16 GB","🧩"],["SSD 1 TB","💾"],["Placa de video","🎮"],["Fuente 650 W","⚡"],["Gabinete","🖥️"]],"Gamer Pro":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 32 GB","🧩"],["SSD 1 TB","💾"],["Placa de video","🎮"],["Cooler para procesador","❄️"],["Fuente 750 W","⚡"],["Gabinete","🖥️"]],"Gamer Ultra":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 32 GB","🧩"],["SSD 2 TB","💾"],["Placa de video","🎮"],["Refrigeración líquida","❄️"],["Fuente 850 W","⚡"],["Gabinete","🖥️"]],"Streamer":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 32 GB","🧩"],["SSD 1 TB","💾"],["Disco de grabación 2 TB","🗄️"],["Placa de video","🎮"],["Cooler para procesador","❄️"],["Fuente 750 W","⚡"],["Gabinete","🖥️"]],"Creator":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 32 GB","🧩"],["SSD 2 TB","💾"],["Placa de video","🎮"],["Cooler para procesador","❄️"],["Fuente 750 W","⚡"],["Gabinete","🖥️"]],"Workstation":[["Procesador","🧠"],["Placa madre","🔌"],["Memoria RAM 64 GB","🧩"],["SSD 2 TB","💾"],["Disco de datos 4 TB","🗄️"],["Placa de video","🎮"],["Refrigeración líquida","❄️"],["Fuente 1000 W","⚡"],["Gabinete","🖥️"]]};
+const DESC={"Estudiante":"Estudio, navegación y videollamadas","Oficina Pro":"Trabajo diario y multitarea","Mini Compacta":"Pequeña y silenciosa para casa u oficina","Gamer Entry":"Jugar en Full HD con buen rendimiento","Gamer Pro":"Juegos exigentes en calidad alta","Gamer Ultra":"Máximo rendimiento, hasta 4K","Streamer":"Jugar y transmitir al mismo tiempo","Creator":"Edición de video, foto y diseño","Workstation":"Render, 3D y trabajo profesional pesado"};
+
+const $=i=>document.getElementById(i);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const today=()=>new Date().toISOString().slice(0,10);
+const wa=(p,t)=>{let d=String(p||"").replace(/\D/g,"");if(!String(p).trim().startsWith("+")){d=d.replace(/^0+/,"");if(!d.startsWith("54"))d="549"+d}return"https://wa.me/"+d+(t?"?text="+encodeURIComponent(t):"")};
+const ESTADOS=["Reservando","Completo","En ensamblado","Listo para entrega","Entregado","Pausado","Cancelado"],OKS=["Completo","Listo para entrega","Entregado"];
+let user=null,isAdmin=false,users=[],projects=[],logs=[],leads=[],unsubs=[],sec="resumen",selC=null,selP=null,q="",fEst="Todos",fLog="";
+const NOREADY=fbOk?'<div class="c" style="border-top:4px solid var(--ye)">Falta conectar Firebase en este archivo.</div>':'<div class="c" style="border-top:4px solid var(--rd)">No se pudo cargar Firebase. Revisá tu conexión, desactivá bloqueadores para este sitio y recargá con Ctrl+Shift+R.</div>';
+const uname=id=>(users.find(u=>u.id==id)||{}).name||"(sin nombre)";
+const est=p=>p.estado||"Reservando";
+const stat=p=>{const t=p.parts.length,d=p.parts.filter(x=>x.st).length;return{t,d,pct:t?Math.round(d/t*100):0}};
+const last=p=>{const l=logs.filter(x=>x.pid==p.id).sort((a,b)=>b.ms-a.ms)[0];return l?l.t:(p.created&&p.created.toDate?p.created.toDate().toISOString().slice(0,10):"")};
+const days=d=>d?Math.floor((Date.now()-new Date(d))/864e5):0;
+const bar=pc=>`<div class="bar" style="margin:8px 0"><div style="width:${pc}%"></div></div>`;
+const tag=(t,ok)=>`<span class="tag${ok?" ok":""}">${esc(t)}</span>`;
+const cp=()=>projects.find(p=>p.id==selP);
+const cfgOpts=()=>Object.keys(CFG).map(k=>`<option>${k}</option>`).join("");
+const lg=(p,x)=>addDoc(collection(db,"log"),{pid:p.id,uid:p.uid,x,t:today(),ms:Date.now()});
+/* acceso */
+window.login=async()=>{try{await signInWithEmailAndPassword(auth,$("ae").value.trim(),$("ap").value)}catch(e){$("aerr").textContent="Email o contraseña incorrectos, o este dominio no está autorizado en Firebase."}};
+window.out=()=>signOut(auth);
+if(ready)onAuthStateChanged(auth,async u=>{unsubs.forEach(f=>f());unsubs=[];user=u;isAdmin=false;
+if(u){try{isAdmin=(await getDoc(doc(db,"admins",u.uid))).exists();
+if(isAdmin){const L=(c,fn)=>unsubs.push(onSnapshot(collection(db,c),s=>{fn(s.docs.map(d=>({id:d.id,...d.data()})));render()},e=>console.error(c,e)));L("users",a=>users=a);L("projects",a=>projects=a);L("log",a=>logs=a);L("leads",a=>leads=a)}}catch(e){console.error(e)}}
+render()});
+/* navegación */
+window.go=s=>{sec=s;selC=selP=null;q="";fLog="";render()};
+window.openC=id=>{sec="clientes";selC=id;render()};
+window.openP=id=>{sec="proyectos";selP=id;render()};
+window.back=()=>{selC=selP=null;render()};
+window.setQ=v=>{q=v;const l=$("lst");if(l)l.innerHTML=sec=="clientes"?lstC():lstP()};
+window.setF=v=>{fEst=v;render()};
+window.setLog=v=>{fLog=v;const l=$("llog");if(l)l.innerHTML=rowsLog()};
+/* acciones */
+window.newP=uid=>{if(!uid)return;const f=$("pf").value;addDoc(collection(db,"projects"),{uid,cfg:f,estado:"Reservando",parts:CFG[f].map(([n,ic])=>({n,ic,st:0,d:"",r:""})),created:serverTimestamp()}).then(r=>{sec="proyectos";selP=r.id;selC=null;render()})};
+async function setParts(p,parts,x){const all=parts.length>0&&parts.every(y=>y.st),patch={parts};if(all&&est(p)=="Reservando")patch.estado="Completo";if(!all&&est(p)=="Completo")patch.estado="Reservando";await updateDoc(doc(db,"projects",p.id),patch);if(x)await lg(p,x)}
+window.buy=i=>{const p=cp(),r=$("r"+i).value.trim();if(!r){$("r"+i).focus();return}setParts(p,p.parts.map((x,j)=>j==i?{...x,st:1,d:today(),r}:x),`${p.parts[i].n} registrada (${r})`)};
+window.undo=i=>{const p=cp();setParts(p,p.parts.map((x,j)=>j==i?{...x,st:0,d:"",r:""}:x),`${p.parts[i].n} revertida`)};
+window.addPart=()=>{const n=$("np").value.trim();if(!n)return;setParts(cp(),[...cp().parts,{n,ic:"🔧",st:0,d:"",r:""}],"Pieza agregada: "+n)};
+window.delPart=i=>{const p=cp();if(!confirm("¿Quitar esta pieza del proyecto?"))return;setParts(p,p.parts.filter((_,j)=>j!=i),"Pieza quitada: "+p.parts[i].n)};
+window.setEst=v=>{const p=cp();updateDoc(doc(db,"projects",p.id),{estado:v});lg(p,"Estado: "+v)};
+window.delP=async()=>{if(!confirm("¿Eliminar este proyecto? No se puede deshacer."))return;const id=selP;selP=null;await deleteDoc(doc(db,"projects",id))};
+window.savePhone=()=>updateDoc(doc(db,"users",selC),{phone:$("cph").value.trim()});
+window.setL=(id,v)=>updateDoc(doc(db,"leads",id),{s:v});
+window.delL=id=>{if(confirm("¿Eliminar esta solicitud?"))deleteDoc(doc(db,"leads",id))};
+function csv(name,rows){const t=rows.map(r=>r.map(c=>'"'+String(c??"").replace(/"/g,'""')+'"').join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+t],{type:"text/csv"}));a.download=name;a.click()}
+window.exC=()=>csv("clientes.csv",[["Nombre","Email","Celular","Proyectos"],...users.map(u=>[u.name,u.email,u.phone,projects.filter(p=>p.uid==u.id).length])]);
+window.exP=()=>csv("proyectos.csv",[["Cliente","Configuración","Estado","Piezas compradas","Piezas totales","Avance %","Última actividad"],...projects.map(p=>{const s=stat(p);return[uname(p.uid),p.cfg,est(p),s.d,s.t,s.pct,last(p)]})]);
+window.exL=()=>csv("actividad.csv",[["Fecha","Cliente","Detalle"],...logs.slice().sort((a,b)=>b.ms-a.ms).map(l=>[l.t,uname(l.uid),l.x])]);
+/* vistas */
+const pcard=p=>{const s=stat(p);return`<div class="c h" onclick="openP('${p.id}')" style="cursor:pointer"><b>${esc(uname(p.uid))}</b><br><span class="mu">${esc(p.cfg)}</span> ${tag(est(p),OKS.includes(est(p)))}${bar(s.pct)}<small class="mu">${s.d} de ${s.t} piezas · ${s.pct}%</small></div>`};
+const alertList=(t,a)=>a.length?`<div class="c"><b>${t}</b>${a.map(p=>`<div class="row"><button class="b" onclick="openP('${p.id}')">${esc(uname(p.uid))} · ${esc(p.cfg)}</button><small class="mu">${stat(p).pct}%</small></div>`).join("")}</div>`:"";
+function vResumen(){const act=projects.filter(p=>!["Entregado","Cancelado"].includes(est(p)));let comp=0,pend=0;projects.forEach(p=>{const s=stat(p);comp+=s.d;pend+=s.t-s.d});
+const ready2=act.filter(p=>stat(p).pct==100&&["Reservando","Completo"].includes(est(p))),stale=act.filter(p=>stat(p).pct<100&&days(last(p))>=15),near=act.filter(p=>{const x=stat(p).pct;return x>=70&&x<100}),nl=leads.filter(l=>(l.s||"Nueva")=="Nueva");
+const by={};projects.forEach(p=>by[p.cfg]=(by[p.cfg]||0)+1);const mx=Math.max(1,...Object.values(by));
+const K=[["Clientes",users.length],["Proyectos activos",act.length],["Piezas compradas",comp],["Piezas pendientes",pend],["Listos para ensamblar",ready2.length],["Solicitudes nuevas",nl.length]];
+return`<div class="g">${K.map((k,i)=>`<div class="c" style="border-top:4px solid var(--${["gr","rd","ye","cy"][i%4]})"><div class="kp">${k[1]}</div><span class="mu">${k[0]}</span></div>`).join("")}</div>
+<h3>Requiere atención</h3>${alertList("✅ Completos: listos para ensamblar",ready2)}${alertList("⏳ Sin movimiento hace 15 días o más",stale)}${alertList("🔜 Casi completos (70% o más)",near)}${nl.length?`<div class="c"><button class="b p" onclick="go('solicitudes')">💬 ${nl.length} solicitud(es) nueva(s) sin contactar</button></div>`:""}${!ready2.length&&!stale.length&&!near.length&&!nl.length?'<p class="mu">Todo al día.</p>':""}
+<h3>Proyectos por configuración</h3><div class="c">${Object.keys(by).length?Object.entries(by).sort((a,b)=>b[1]-a[1]).map(([k,n])=>`<div class="row"><span style="width:130px">${esc(k)}</span><div class="bar" style="flex:1;margin:0"><div style="width:${n/mx*100}%"></div></div><b>${n}</b></div>`).join(""):'<span class="mu">Todavía no hay proyectos.</span>'}</div>
+<h3>Actividad reciente</h3><div class="c">${logs.slice().sort((a,b)=>b.ms-a.ms).slice(0,8).map(l=>`<small class="mu">${esc(l.t)} · ${esc(uname(l.uid))} · ${esc(l.x)}</small><br>`).join("")||'<span class="mu">Sin actividad.</span>'}</div>`}
+const lstC=()=>{const t=q.toLowerCase();return users.filter(u=>!t||((u.name||"")+" "+(u.email||"")+" "+(u.phone||"")).toLowerCase().includes(t)).sort((a,b)=>(a.name||"").localeCompare(b.name||"")).map(u=>`<tr onclick="openC('${u.id}')" style="cursor:pointer"><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${esc(u.phone||"—")}</td><td>${projects.filter(p=>p.uid==u.id).length}</td></tr>`).join("")||'<tr><td colspan="4" class="mu">Sin clientes.</td></tr>'};
+function vClientes(){if(selC){const u=users.find(x=>x.id==selC);if(!u){selC=null;return vClientes()}const ps=projects.filter(p=>p.uid==u.id);
+return`<button class="b" onclick="back()">← Clientes</button><div class="c" style="margin-top:10px"><h3 style="margin:0">${esc(u.name)}</h3><p class="mu">${esc(u.email)}</p><div class="row"><input id="cph" type="tel" value="${esc(u.phone||"")}" placeholder="Celular"><button class="b" onclick="savePhone()">Guardar celular</button>${u.phone?`<a class="b p" style="display:inline-block" target="_blank" rel="noopener" href="${wa(u.phone,"Hola "+u.name+", te escribimos de Rompecabezas (Ábacos Digitales).")}">WhatsApp</a>`:""}</div></div><h3>Proyectos</h3>${ps.length?`<div class="g">${ps.map(pcard).join("")}</div>`:'<p class="mu">Sin proyectos todavía.</p>'}<div class="c" style="margin-top:12px"><div class="row"><select id="pf">${cfgOpts()}</select><button class="b p" onclick="newP('${u.id}')">Crear proyecto para este cliente</button></div></div>`}
+return`<div class="row"><input id="sq" value="${esc(q)}" placeholder="Buscar cliente…" oninput="setQ(this.value)" style="flex:1;min-width:180px"><button class="b" onclick="exC()">Exportar CSV</button></div><div class="c tw"><table><tr><th>Nombre</th><th>Email</th><th>Celular</th><th>Proyectos</th></tr><tbody id="lst">${lstC()}</tbody></table></div><small class="mu">Los clientes aparecen acá cuando crean su acceso en el sitio.</small>`}
+const lstP=()=>{const t=q.toLowerCase();return projects.filter(p=>(fEst=="Todos"||est(p)==fEst)&&(!t||(uname(p.uid)+" "+p.cfg).toLowerCase().includes(t))).map(pcard).join("")||'<span class="mu">Sin proyectos para mostrar.</span>'};
+function vProyectos(){const p=selP&&cp();if(selP&&!p){selP=null}if(p){const s=stat(p),u=users.find(x=>x.id==p.uid)||{},hl=logs.filter(l=>l.pid==p.id).sort((a,b)=>b.ms-a.ms);
+return`<button class="b" onclick="back()">← Proyectos</button><div class="c" style="margin-top:10px"><div class="row" style="justify-content:space-between"><div><h3 style="margin:0">${esc(p.cfg)}</h3><span class="mu">${esc(u.name||"")} · ${esc(u.email||"")}</span></div><select onchange="setEst(this.value)">${ESTADOS.map(e=>`<option${e==est(p)?" selected":""}>${e}</option>`).join("")}</select></div>${bar(s.pct)}<p>${s.d} de ${s.t} piezas · ${s.pct}%</p><div class="row">${u.phone?`<a class="b p" style="display:inline-block" target="_blank" rel="noopener" href="${wa(u.phone,`Hola ${u.name}, te escribimos de Rompecabezas (Ábacos Digitales). Tu rompecabezas va ${s.pct}% (${s.d} de ${s.t} piezas). Estado: ${est(p)}.`)}">Avisar avance por WhatsApp</a>`:'<span class="mu">Este cliente no cargó celular.</span>'}</div></div>
+<div class="c tw"><table><tr><th>Pieza</th><th>Estado</th><th>Comprobante</th><th></th></tr>${p.parts.map((x,i)=>`<tr><td>${x.ic} ${esc(x.n)}</td><td>${tag(x.st?"Comprada · reservada":"Pendiente",x.st)}</td><td>${x.st?esc(x.r)+" · "+esc(x.d):`<input id="r${i}" placeholder="N.º comprobante" style="width:130px">`}</td><td>${x.st?`<button class="b" onclick="undo(${i})">Revertir</button>`:`<button class="b p" onclick="buy(${i})">Registrar compra</button>`} <button class="b" onclick="delPart(${i})" title="Quitar pieza">✕</button></td></tr>`).join("")}</table></div>
+<div class="c" style="margin-top:12px"><div class="row"><input id="np" placeholder="Agregar pieza extra (ej. Monitor)"><button class="b" onclick="addPart()">Agregar pieza</button></div></div>
+<h3>Historial</h3><div class="c">${hl.map(l=>`<small class="mu">${esc(l.t)} · ${esc(l.x)}</small><br>`).join("")||'<span class="mu">Sin movimientos.</span>'}</div>
+<p><button class="b" style="border-color:var(--rd);color:var(--rd)" onclick="delP()">Eliminar proyecto</button></p>`}
+return`<div class="row"><input id="sq" value="${esc(q)}" placeholder="Buscar por cliente o configuración…" oninput="setQ(this.value)" style="flex:1;min-width:180px"><select onchange="setF(this.value)">${["Todos",...ESTADOS].map(e=>`<option${e==fEst?" selected":""}>${e}</option>`).join("")}</select><button class="b" onclick="exP()">Exportar CSV</button></div>
+<div class="c"><div class="row"><b>Nuevo proyecto:</b><select id="pu">${users.map(u=>`<option value="${u.id}">${esc(u.name||u.email)}</option>`).join("")}</select><select id="pf">${cfgOpts()}</select><button class="b p" onclick="newP($('pu').value)">Crear</button></div></div><div id="lst" class="g" style="margin-top:12px">${lstP()}</div>`}
+function vSolic(){const S=["Nueva","Contactada","Descartada"];return`<div class="c tw"><table><tr><th>Fecha</th><th>Nombre</th><th>Contacto</th><th>Interés</th><th>Estado</th><th></th></tr>${leads.slice().sort((a,b)=>String(b.t).localeCompare(String(a.t))).map(l=>`<tr><td>${esc(l.t)}</td><td>${esc(l.n)}</td><td>${esc(l.e)}<br><small class="mu">${esc(l.p||"")}</small></td><td>${esc(l.c)}</td><td><select onchange="setL('${l.id}',this.value)">${S.map(e=>`<option${e==(l.s||"Nueva")?" selected":""}>${e}</option>`).join("")}</select></td><td>${l.p?`<a class="b" style="display:inline-block" target="_blank" rel="noopener" href="${wa(l.p,"Hola "+l.n+", te escribimos de Rompecabezas (Ábacos Digitales) por tu solicitud de presupuesto.")}">WhatsApp</a> `:""}<button class="b" onclick="delL('${l.id}')">✕</button></td></tr>`).join("")||'<tr><td colspan="6" class="mu">Sin solicitudes.</td></tr>'}</table></div>`}
+const rowsLog=()=>{const t=fLog.toLowerCase();return logs.slice().sort((a,b)=>b.ms-a.ms).filter(l=>!t||(uname(l.uid)+" "+l.x).toLowerCase().includes(t)).slice(0,150).map(l=>`<tr><td>${esc(l.t)}</td><td>${esc(uname(l.uid))}</td><td>${esc(l.x)}</td></tr>`).join("")||'<tr><td colspan="3" class="mu">Sin movimientos.</td></tr>'};
+const vAct=()=>`<div class="row"><input value="${esc(fLog)}" placeholder="Filtrar por cliente o detalle…" oninput="setLog(this.value)" style="flex:1;min-width:180px"><button class="b" onclick="exL()">Exportar CSV</button></div><div class="c tw"><table><tr><th>Fecha</th><th>Cliente</th><th>Detalle</th></tr><tbody id="llog">${rowsLog()}</tbody></table></div>`;
+const NAV=[["resumen","📊","Resumen"],["clientes","👥","Clientes"],["proyectos","🧩","Proyectos"],["solicitudes","💬","Solicitudes"],["actividad","🕘","Actividad"]];
+function render(){const A=$("app");
+if(!ready){A.innerHTML='<div class="wrap">'+NOREADY+"</div>";return}
+if(!user){A.innerHTML='<div class="wrap"><div class="c" style="max-width:400px;margin:40px auto"><h3 style="margin-top:0">Acceso de administración</h3><input id="ae" type="email" placeholder="Email" style="width:100%;margin:4px 0"><input id="ap" type="password" placeholder="Contraseña" style="width:100%;margin:4px 0" onkeydown="if(event.key===\'Enter\')login()"><button class="b p" onclick="login()">Ingresar</button><div id="aerr" style="color:var(--rd);margin-top:6px"></div></div></div>';return}
+if(!isAdmin){A.innerHTML='<div class="wrap"><div class="c" style="border-top:4px solid var(--rd)">Esta cuenta no tiene permisos de administrador. Revisá que el documento en la colección <b>admins</b> tenga como ID tu UID y que las reglas de Firestore estén publicadas.</div><p><button class="b" onclick="out()">Salir</button></p></div>';return}
+const nl=leads.filter(l=>(l.s||"Nueva")=="Nueva").length,V={resumen:vResumen,clientes:vClientes,proyectos:vProyectos,solicitudes:vSolic,actividad:vAct}[sec]();
+const act=document.activeElement,keep=act&&act.id=="sq"?act.selectionStart:null;
+A.innerHTML=`<div class="shell"><aside class="side">${NAV.map(n=>`<button class="b${sec==n[0]?" on":""}" onclick="go('${n[0]}')">${n[1]} ${n[2]}${n[0]=="solicitudes"&&nl?` <span class="tag ok">${nl}</span>`:""}</button>`).join("")}<button class="b" onclick="out()">Salir</button></aside><section class="main">${V}</section></div>`;
+if(keep!==null){const s=$("sq");if(s){s.focus();s.setSelectionRange(keep,keep)}}}
+render();
+</script></body></html>

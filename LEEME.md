@@ -19,5 +19,10 @@
 - Para mostrar a los clientes un botón «Escribir a Ábacos por WhatsApp», completá `WHATSAPP_ABACOS` en `index.html` (código de país + número, solo dígitos, ej. 5493411234567).
 - Si ya publicaste las reglas, volvé a pegar el nuevo `firestore.rules` (ahora aceptan el campo celular).
 
+## Panel de administración (admin.html)
+- Es una página propia: `https://TU-USUARIO.github.io/TU-REPO/admin.html` (también se llega desde el enlace «Acceso administración» del pie del sitio).
+- Secciones: Resumen (indicadores y alertas), Clientes, Proyectos, Solicitudes y Actividad.
+- Subí `admin.html` junto a `index.html` y `fondo.jpg`. Usa las mismas reglas de Firestore y tu documento en `admins`; no hay que cambiar nada en Firebase.
+
 ## Pendiente
 Términos y condiciones, vigencia de reservas, cancelaciones y garantías (parte legal), fondo del setup, logo definitivo y notificaciones por email.
